@@ -360,6 +360,26 @@ var AppListItemComponent = React.createClass({
     );
   },
 
+  getServiceLink: function () {
+    var model = this.props.model;
+    var scheme = (model.labels && "SERVICE_SCHEME" in model.labels &&
+       (model.labels["SERVICE_SCHEME"] === "http" ||
+        model.labels["SERVICE_SCHEME"] === "https"))
+      ? model.labels["SERVICE_SCHEME"]
+      : "http";
+    var cleanAppName = model.id.substring(1).replace("/", "-");
+    var serviceLink = scheme + "://" + cleanAppName + "." +
+      Config.serviceDomain;
+
+    if (model.isGroup)
+      return null;
+
+    return (<a href={serviceLink} target="_blank"
+          onClick={handleClickAndStopPropagation}>
+        <div className="icon icon-small ion-forward"></div>
+    </a>);
+  },
+
   getStatus: function () {
     var classSet = classNames("status-cell", {
       "cell-highlighted": this.props.sortKey === "status"
@@ -386,6 +406,8 @@ var AppListItemComponent = React.createClass({
       "cell-highlighted": sortKey === "id"
     });
 
+    var serviceLinkClassSet = classNames("text-right service-cell");
+
     var appLogsLinkClassSet = classNames("text-right logs-cell");
 
     var cpuClassSet = classNames("text-right total cpu-cell", {
@@ -406,6 +428,9 @@ var AppListItemComponent = React.createClass({
           {this.getIcon()}
         </td>
         {this.getAppName()}
+        <td className={serviceLinkClassSet}>
+          {this.getServiceLink()}
+        </td>
         <td className={appLogsLinkClassSet}>
           {this.getLogsLink()}
         </td>

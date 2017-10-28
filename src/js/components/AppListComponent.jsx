@@ -476,6 +476,8 @@ var AppListComponent = React.createClass({
 
     var logsLinkClassSet = classNames("text-right logs-cell");
 
+    var serviceLinkClassSet = classNames("text-right service-cell");
+
     var cpuClassSet = classNames("text-right cpu-cell", {
       "cell-highlighted": state.sortKey === "totalCpus"
     });
@@ -518,6 +520,7 @@ var AppListComponent = React.createClass({
           <colgroup>
             <col className="icon-col" />
             <col className="name-col" />
+            <col className="service-link-col" />
             <col className="logs-link-col" />
             <col className="cpu-col" />
             <col className="ram-col" />
@@ -532,6 +535,11 @@ var AppListComponent = React.createClass({
                 <span onClick={this.sortBy.bind(null, "id")}
                     className={headerClassSet}>
                   Name {this.getCaret("id")}
+                </span>
+              </th>
+              <th className={serviceLinkClassSet}>
+                <span className={headerClassSet}>
+                  Service
                 </span>
               </th>
               <th className={logsLinkClassSet}>
