@@ -1,6 +1,6 @@
 import packageJSON from "../../../package.json";
 
-var config = {
+var config = Object.assign({
   // @@ENV gets replaced by build system
   environment: "@@ENV",
   // If the UI is served through a proxied URL, this can be set here.
@@ -20,6 +20,6 @@ var config = {
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :
     `${packageJSON.version}-SNAPSHOT`
-};
+}, runtimeConfig);
 
 export default config;
