@@ -15,6 +15,7 @@ var config = {
     address: "localhost",
     port: 8181
   },
+  appLogsLinkTemplate: "#",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :
     `${packageJSON.version}-SNAPSHOT`
