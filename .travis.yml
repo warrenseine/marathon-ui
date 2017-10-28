@@ -6,3 +6,13 @@ node_js:
   - "5.4.1"
 script: npm run dist
 after_success: npm run cover:report
+before_deploy:
+  - cd dist && zip -r marathon-ui-${TRAVIS_TAG}.zip .
+deploy:
+  provider: releases
+  skip_cleanup: true
+  file: marathon-ui-${TRAVIS_TAG}.zip
+  api_key:
+    secure: "hD1jfRR84orOSeP2o1NXih49EK9fjJavmTuYxYD2w2nS4sn4/ok8oTdEHeBaAn8PyD763RDJNEKH0TELM3fMFywYpQDnzxzpCmPTrn3fNZINaJFlrXoIjWyQsX8H2DCb9tj7Yt9xNRxLwiecPxBTiXPew5KKjFx0CIxqAlXwcPmNjtNAqfRqEDx2f8vB9xwQdNPXZpjBZSBtOFX+P8o628vDjEcF3uxGgpw85/kUkbksGGsvrnB5eEywpIJ3QI2PaZTSFWrr7HbWl6NuH2YLZkNHm2muXqJYdTw9DqQUBpG5UoP2ep/re67PmfJCrCyV+sWMiEbJegxr7fwVU6Xr1M+gmLdqD1JhaKSGSfiEXaA8zUw1F//2Nw4UbIXf9clcB6E9vymqAkmrxUUPoZUOFZQFd8rk4A/Ag99hWqYnYGVS+hbt2iYHx6dnMwAy9yqmLKUUhxHJwRHv9z3lehhjNYcxT2/IQX0Uv5MpQSpBFxahyHgRxDQLPO7BP4KObwgseiEOF34jiU5I8TyEDmwV2AJ1TQ0FQ1T5M28v+GlhYUcsQwjw52qIGnfA66y47lrp49+QFKlOcCqVtjHvdn7hTjCWD6m6KkgrIE8NkEEu8yH/ftHMft8Cxes1H9uGcQGncHFCh9noEQfPafzyZPQa4gmso6jLLT+W63ycQV09qAc="
+  on:
+    tags: true
