@@ -1,6 +1,7 @@
 import classNames from "classnames";
 import React from "react/addons";
 import OnClickOutsideMixin from "react-onclickoutside";
+import Mustache from "mustache";
 
 import AppActionsHandlerMixin from "../mixins/AppActionsHandlerMixin";
 import AppHealthBarWithTooltipComponent
@@ -15,6 +16,11 @@ import Util from "../helpers/Util";
 import PathUtil from "../helpers/PathUtil";
 import PopoverComponent from "./PopoverComponent";
 import DOMUtil from "../helpers/DOMUtil";
+import Config from "../config/config";
+
+function handleClickAndStopPropagation(e) {
+  e.stopPropagation();
+}
 
 var AppListItemComponent = React.createClass({
   displayName: "AppListItemComponent",
@@ -319,6 +325,20 @@ var AppListItemComponent = React.createClass({
     return <i className="icon icon-small app" title="Application"></i>;
   },
 
+  getLogsLink: function () {
+    var model = this.props.model;
+    if (model.isGroup)
+      return null;
+
+    const logsLink = Mustache.render(Config.appLogsLinkTemplate, {
+      appId: encodeURIComponent(model.id.substring(1))
+    });
+    return (<a href={logsLink} target="_blank"
+        onClick={handleClickAndStopPropagation}>
+      <div className="icon icon-mini file"></div>
+    </a>);
+  },
+
   getLabels: function () {
     var labels = this.props.model.labels;
     if (labels == null || Object.keys(labels).length === 0) {
@@ -338,6 +358,26 @@ var AppListItemComponent = React.createClass({
         </span>
      </AppListItemLabelsComponent>
     );
+  },
+
+  getServiceLink: function () {
+    var model = this.props.model;
+    var scheme = (model.labels && "SERVICE_SCHEME" in model.labels &&
+       (model.labels["SERVICE_SCHEME"] === "http" ||
+        model.labels["SERVICE_SCHEME"] === "https"))
+      ? model.labels["SERVICE_SCHEME"]
+      : "http";
+    var cleanAppName = model.id.substring(1).replace("/", "-");
+    var serviceLink = scheme + "://" + cleanAppName + "." +
+      Config.serviceDomain;
+
+    if (model.isGroup)
+      return null;
+
+    return (<a href={serviceLink} target="_blank"
+          onClick={handleClickAndStopPropagation}>
+        <div className="icon icon-small ion-forward"></div>
+    </a>);
   },
 
   getStatus: function () {
@@ -366,6 +406,10 @@ var AppListItemComponent = React.createClass({
       "cell-highlighted": sortKey === "id"
     });
 
+    var serviceLinkClassSet = classNames("text-right service-cell");
+
+    var appLogsLinkClassSet = classNames("text-right logs-cell");
+
     var cpuClassSet = classNames("text-right total cpu-cell", {
       "cell-highlighted": sortKey === "totalCpus"
     });
@@ -384,6 +428,12 @@ var AppListItemComponent = React.createClass({
           {this.getIcon()}
         </td>
         {this.getAppName()}
+        <td className={serviceLinkClassSet}>
+          {this.getServiceLink()}
+        </td>
+        <td className={appLogsLinkClassSet}>
+          {this.getLogsLink()}
+        </td>
         <td className={cpuClassSet}>
           {parseFloat(model.totalCpus).toFixed(1)}
         </td>
