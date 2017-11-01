@@ -7,5 +7,10 @@ var runtimeConfig = {
   // The generator building the logs links for applications
   appLogsLinkGenerator: function (appId) {
     return "http://logs-store-like-kibana/?appId=" + appId.substring(1);
+  },
+
+  // The generator building the logs links for tasks
+  taskLogsLinkGenerator: function (appId, taskId) {
+    return "http://logs-store-like-kibana/?appId=" + appId.substring(1) + "&taskId=" + taskId;
   }
 };

@@ -3,6 +3,11 @@ import {shallow} from "enzyme";
 
 import React from "react/addons";
 import TaskListItemComponent from "../../js/components/TaskListItemComponent";
+import Config from "../../js/config/config";
+
+Config.taskLogsLinkGenerator = function (appId, taskId) {
+  return "https://logs-store?appId=" + appId + "&taskId=" + taskId;
+}
 
 describe("Task List Item component", function () {
 
@@ -48,7 +53,7 @@ describe("Task List Item component", function () {
   it("has the correct version", function () {
     expect(this.component
       .find("td")
-      .at(6)
+      .at(5)
       .children()
       .first()
       .props()
@@ -59,7 +64,7 @@ describe("Task List Item component", function () {
   it("has the correct update timestamp", function () {
     var cellProps = this.component
       .find("td")
-      .at(7)
+      .at(6)
       .children()
       .first()
       .props();
@@ -67,4 +72,13 @@ describe("Task List Item component", function () {
     expect(cellProps.dateTime).to.equal("2015-06-29T14:11:58.709Z");
   });
 
+  it("has the correct logs link", function () {
+    var a = this.component
+    .find("td")
+    .at(4)
+    .children()
+    .first()
+    .props();
+    expect(a.href).to.equal("https://logs-store?appId=/app-1&taskId=task-123");
+  });
 });

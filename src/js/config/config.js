@@ -21,6 +21,12 @@ var config = Object.assign({
   appLogsLinkGenerator: function () { 
     return ""; 
   },
+  // The generator building the logs links for tasks
+  // input: appId, taskId
+  // output: the link to the logs
+  taskLogsLinkGenerator: function () {
+    return "";
+  },
   serviceDomain: "",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :
