@@ -4,6 +4,13 @@ var runtimeConfig = {
   // The domain used to compute the service endpoint
   serviceDomain: "marathon.service.domain",
 
-  // The pattern to build the links to the logs
-  appLogsLinkTemplate: "http://logs-store-like-kibana/?appId={{appId}}",
+  // The generator building the logs links for applications
+  appLogsLinkGenerator: function (appId) {
+    return "http://logs-store-like-kibana/?appId=" + appId.substring(1);
+  },
+
+  // The generator building the logs links for tasks
+  taskLogsLinkGenerator: function (appId, taskId) {
+    return "http://logs-store-like-kibana/?appId=" + appId.substring(1) + "&taskId=" + taskId;
+  }
 };

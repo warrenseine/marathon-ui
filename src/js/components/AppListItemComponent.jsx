@@ -1,7 +1,6 @@
 import classNames from "classnames";
 import React from "react/addons";
 import OnClickOutsideMixin from "react-onclickoutside";
-import Mustache from "mustache";
 
 import AppActionsHandlerMixin from "../mixins/AppActionsHandlerMixin";
 import AppHealthBarWithTooltipComponent
@@ -330,10 +329,7 @@ var AppListItemComponent = React.createClass({
     if (model.isGroup)
       return null;
 
-    const logsLink = Mustache.render(Config.appLogsLinkTemplate, {
-      appId: encodeURIComponent(model.id.substring(1))
-    });
-    return (<a href={logsLink} target="_blank"
+    return (<a href={Config.appLogsLinkGenerator(model.id)} target="_blank"
         onClick={handleClickAndStopPropagation}>
       <div className="icon icon-mini file"></div>
     </a>);

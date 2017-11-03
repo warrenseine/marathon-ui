@@ -15,7 +15,18 @@ var config = Object.assign({
     address: "localhost",
     port: 8181
   },
-  appLogsLinkTemplate: "#",
+  // The generator building the logs links for applications
+  // input: appId
+  // output: the link to the logs
+  appLogsLinkGenerator: function () { 
+    return ""; 
+  },
+  // The generator building the logs links for tasks
+  // input: appId, taskId
+  // output: the link to the logs
+  taskLogsLinkGenerator: function () {
+    return "";
+  },
   serviceDomain: "",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :

@@ -6,7 +6,7 @@ import Moment from "moment";
 import AppsStore from "../stores/AppsStore";
 import HealthStatus from "../constants/HealthStatus";
 import TaskStatus from "../constants/TaskStatus";
-import TaskFileDownloadComponent from "../components/TaskFileDownloadComponent";
+import Config from "../config/config";
 
 function joinNodes(nodes, separator = ", ") {
   var lastIndex = nodes.length - 1;
@@ -150,6 +150,12 @@ var TaskListItemComponent = React.createClass({
     this.props.onToggle(this.props.task, event.target.checked);
   },
 
+  getLogsLink: function () {
+    const logsLink = Config.taskLogsLinkGenerator(this.props.appId,
+      this.props.task.id);
+    return <a href={logsLink} target="_blank">Logs</a>;
+  },
+
   render: function () {
     var task = this.props.task;
     var sortKey = this.props.sortKey;
@@ -238,10 +244,7 @@ var TaskListItemComponent = React.createClass({
           </span>
         </td>
         <td className="text-center">
-          <TaskFileDownloadComponent task={task} fileName="stderr" />
-        </td>
-        <td className="text-center">
-          <TaskFileDownloadComponent task={task} fileName="stdout" />
+          {this.getLogsLink()}
         </td>
         <td className={versionClassSet}>
           <span title={version}>

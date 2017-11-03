@@ -5,7 +5,9 @@ import React from "react/addons";
 import AppListItemComponent from "../../js/components/AppListItemComponent";
 import config from "../../js/config/config";
 
-config.appLogsLinkTemplate = "http://kibana?appId={{appId}}";
+config.appLogsLinkGenerator = function (appId) {
+  return "http://kibana?appId=" + appId.substring(1);
+};
 config.serviceDomain = "service.domain";
 
 describe("AppListItemComponent", function () {
