@@ -153,7 +153,9 @@ var TaskListItemComponent = React.createClass({
   getLogsLink: function () {
     const logsLink = Config.taskLogsLinkGenerator(this.props.appId,
       this.props.task.id);
-    return <a href={logsLink} target="_blank">Logs</a>;
+    return (<a href={logsLink} target="_blank">
+      <div className="icon icon-mini file"></div>
+    </a>);
   },
 
   render: function () {
