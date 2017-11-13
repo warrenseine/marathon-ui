@@ -13,7 +13,7 @@ config.serviceDomain = "service.domain";
 describe("AppListItemComponent", function () {
   before(function () {
     var model = {
-      id: "/app-123",
+      id: "/group-123/app-456",
       deployments: [],
       tasksRunning: 4,
       health: [],
@@ -35,7 +35,7 @@ describe("AppListItemComponent", function () {
   });
 
   it("has the correct app id", function () {
-    expect(this.component.find(".name-cell").text()).to.equal("app-123");
+    expect(this.component.find(".name-cell").text()).to.equal("group-123/app-456");
   });
 
   it("has the correct amount of total cpus", function () {
@@ -46,13 +46,13 @@ describe("AppListItemComponent", function () {
     expect(this.component.find(".logs-cell").find("a").html())
       .to.equal("<div class=\"icon icon-mini file\"></div>");
     expect(this.component.find(".logs-cell").find("a").attr("href"))
-      .to.equal("http://kibana?appId=app-123");
+      .to.equal("http://kibana?appId=group-123/app-456");
   });
 
   describe("produces the correct service link", function () {
     it("has an http scheme when no scheme is provided", function () {
       expect(this.component.find(".service-cell").find("a").attr("href"))
-        .to.equal("http://app-123.service.domain");
+        .to.equal("http://group-123-app-456.service.domain");
     });
 
     it("has an https scheme when SERVICE_SCHEME is https", function () {

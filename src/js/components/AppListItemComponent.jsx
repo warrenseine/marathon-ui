@@ -363,7 +363,7 @@ var AppListItemComponent = React.createClass({
         model.labels["SERVICE_SCHEME"] === "https"))
       ? model.labels["SERVICE_SCHEME"]
       : "http";
-    var cleanAppName = model.id.substring(1).replace("/", "-");
+    var cleanAppName = model.id.substring(1).replace(/\//g, "-");
     var serviceLink = scheme + "://" + cleanAppName + "." +
       Config.serviceDomain;
 
