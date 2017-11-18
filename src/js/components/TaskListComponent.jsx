@@ -229,6 +229,9 @@ var TaskListComponent = React.createClass({
               <th className="text-center">
                 Logs
               </th>
+              <th className="text-center">
+                Debug
+              </th>
               <th className={versionClassSet}>
                 <span onClick={this.sortBy.bind(null, "version")}
                     className={headerClassSet}>
