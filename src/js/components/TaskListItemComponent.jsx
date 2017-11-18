@@ -158,6 +158,13 @@ var TaskListItemComponent = React.createClass({
     </a>);
   },
 
+  getDebugLink: function () {
+    const debugLink = Config.debugLinkGenerator(this.props.task.id);
+    return (<a href={debugLink} target="_blank">
+      <div className="icon icon-mini play"></div>
+    </a>);
+  },
+
   render: function () {
     var task = this.props.task;
     var sortKey = this.props.sortKey;
@@ -247,6 +254,9 @@ var TaskListItemComponent = React.createClass({
         </td>
         <td className="text-center">
           {this.getLogsLink()}
+        </td>
+        <td className="text-center">
+          {this.getDebugLink()}
         </td>
         <td className={versionClassSet}>
           <span title={version}>

@@ -18,13 +18,19 @@ var config = Object.assign({
   // The generator building the logs links for applications
   // input: appId
   // output: the link to the logs
-  appLogsLinkGenerator: function () { 
-    return ""; 
+  appLogsLinkGenerator: function () {
+    return "";
   },
   // The generator building the logs links for tasks
   // input: appId, taskId
   // output: the link to the logs
   taskLogsLinkGenerator: function () {
+    return "";
+  },
+  // The generator build the exec links for tasks debugging
+  // input: the taskId
+  // output: the to the web terminal
+  debugLinkGenerator: function () {
     return "";
   },
   serviceDomain: "",

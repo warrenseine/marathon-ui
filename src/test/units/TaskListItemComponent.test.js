@@ -7,7 +7,10 @@ import Config from "../../js/config/config";
 
 Config.taskLogsLinkGenerator = function (appId, taskId) {
   return "https://logs-store?appId=" + appId + "&taskId=" + taskId;
-}
+};
+Config.debugLinkGenerator = function (taskId) {
+  return "https://debug/?taskId=" + taskId;
+};
 
 describe("Task List Item component", function () {
 
@@ -53,7 +56,7 @@ describe("Task List Item component", function () {
   it("has the correct version", function () {
     expect(this.component
       .find("td")
-      .at(5)
+      .at(6)
       .children()
       .first()
       .props()
@@ -64,7 +67,7 @@ describe("Task List Item component", function () {
   it("has the correct update timestamp", function () {
     var cellProps = this.component
       .find("td")
-      .at(6)
+      .at(7)
       .children()
       .first()
       .props();
@@ -80,5 +83,15 @@ describe("Task List Item component", function () {
     .first()
     .props();
     expect(a.href).to.equal("https://logs-store?appId=/app-1&taskId=task-123");
+  });
+
+  it("has the correct debug link", function () {
+    var a = this.component
+    .find("td")
+    .at(5)
+    .children()
+    .first()
+    .props();
+    expect(a.href).to.equal("https://debug/?taskId=task-123");
   });
 });
