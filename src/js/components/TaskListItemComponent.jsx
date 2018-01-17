@@ -7,6 +7,7 @@ import AppsStore from "../stores/AppsStore";
 import HealthStatus from "../constants/HealthStatus";
 import TaskStatus from "../constants/TaskStatus";
 import Config from "../config/config";
+import ServiceSchemeUtil from "../helpers/ServiceSchemeUtil";
 
 function joinNodes(nodes, separator = ", ") {
   var lastIndex = nodes.length - 1;
@@ -29,6 +30,7 @@ var TaskListItemComponent = React.createClass({
     appId: React.PropTypes.string.isRequired,
     hasHealth: React.PropTypes.bool,
     isActive: React.PropTypes.bool.isRequired,
+    labels: React.PropTypes.object.isRequired,
     onToggle: React.PropTypes.func.isRequired,
     sortKey: React.PropTypes.string,
     task: React.PropTypes.object.isRequired,
@@ -37,6 +39,7 @@ var TaskListItemComponent = React.createClass({
 
   getHostAndPorts: function () {
     var task = this.props.task;
+    var props = this.props;
     var ports = task.ports;
 
     if (ports == null || ports.length === 0 ) {
@@ -44,9 +47,11 @@ var TaskListItemComponent = React.createClass({
     }
 
     if (ports != null && ports.length === 1) {
+      const scheme = ServiceSchemeUtil
+        .getServiceSchemeFromLabels(props.labels, 0);
       return (
         <a className="text-muted"
-            href={`//${task.host}:${ports[0]}`}
+            href={`${scheme}://${task.host}:${ports[0]}`}
             target="_blank">
           {`${task.host}:${ports[0]}`}
         </a>
@@ -54,11 +59,13 @@ var TaskListItemComponent = React.createClass({
     }
 
     if (ports != null && ports.length > 1) {
-      let portNodes = ports.map(function (port) {
+      let portNodes = ports.map(function (port, i) {
+        const scheme = ServiceSchemeUtil
+          .getServiceSchemeFromLabels(props.labels, i);
         return (
           <a key={`${task.host}:${port}`}
               className="text-muted"
-              href={`//${task.host}:${port}`}
+              href={`${scheme}://${task.host}:${port}`}
               target="_blank">
             {port}
           </a>
@@ -98,18 +105,24 @@ var TaskListItemComponent = React.createClass({
         let ipAddress = address.ipAddress;
         if (serviceDiscoveryPorts.length === 1) {
           let port = serviceDiscoveryPorts[0].number;
+          const scheme = ServiceSchemeUtil
+            .getServiceSchemeFromLabels(props.labels, 0);
           return (
             <a key={`${ipAddress}:${port}`}
-                className="text-muted" href={`//${ipAddress}:${port}`}>
+                className="text-muted"
+                href={`${scheme}://${ipAddress}:${port}`}>
               {`${ipAddress}:${port}`}
             </a>
           );
         }
 
-        let portNodes = serviceDiscoveryPorts.map((port) => {
+        let portNodes = serviceDiscoveryPorts.map((port, i) => {
+          const scheme = ServiceSchemeUtil
+            .getServiceSchemeFromLabels(props.labels, i);
           return (
             <a key={`${ipAddress}:${port.number}`}
-                className="text-muted" href={`//${ipAddress}:${port.number}`}>
+                className="text-muted"
+                href={`${scheme}://${ipAddress}:${port.number}`}>
               {port.number}
             </a>
           );

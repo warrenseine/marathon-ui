@@ -15,6 +15,7 @@ import Util from "../helpers/Util";
 import PathUtil from "../helpers/PathUtil";
 import PopoverComponent from "./PopoverComponent";
 import DOMUtil from "../helpers/DOMUtil";
+import ServiceSchemeUtil from "../helpers/ServiceSchemeUtil";
 import Config from "../config/config";
 
 function handleClickAndStopPropagation(e) {
@@ -358,11 +359,7 @@ var AppListItemComponent = React.createClass({
 
   getServiceLink: function () {
     var model = this.props.model;
-    var scheme = (model.labels && "SERVICE_SCHEME" in model.labels &&
-       (model.labels["SERVICE_SCHEME"] === "http" ||
-        model.labels["SERVICE_SCHEME"] === "https"))
-      ? model.labels["SERVICE_SCHEME"]
-      : "http";
+    var scheme = ServiceSchemeUtil.getServiceSchemeFromLabels(model.labels, 0);
     var cleanAppName = model.id.substring(1).replace(/\//g, "-");
     var serviceLink = scheme + "://" + cleanAppName + "." +
       Config.serviceDomain;
