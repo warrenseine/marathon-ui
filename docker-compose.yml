@@ -38,8 +38,8 @@ services:
       - zookeeper
       - mesos-master
     environment:
-      - MESOS_CONTAINERIZERS=mesos
-      - MESOS_ISOLATOR=cgroups/cpu, cgroups/mem
+      - MESOS_CONTAINERIZERS=mesos,docker
+      - MESOS_ISOLATOR=cgroups/cpu, cgroups/mem, filesystem/linux, docker/runtime
       - MESOS_LOG_DIR=var/log
       - MESOS_MASTER=zk://zookeeper:2181/mesos
       - MESOS_PORT=5051
@@ -48,6 +48,8 @@ services:
       - MESOS_EXECUTOR_SHUTDOWN_GRACE_PERIOD=90secs
       - MESOS_DOCKER_STOP_TIMEOUT=60secs
       - MESOS_RESOURCES=cpus:4;mem:1280;disk:25600;ports(*):[12000-12999]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
   marathon-service:
     image: mesosphere/marathon:latest
     expose:
@@ -79,7 +81,8 @@ services:
       - DNSDOCK_ALIAS=marathon.docker
     volumes:
       - ./resources/marathon-ui.nginx.conf:/etc/nginx/nginx.conf
-      -  dist:/usr/share/nginx/html
+      - dist:/usr/share/nginx/html
+      - ./src/js/config/runtimeConfig.js:/usr/share/nginx/html/runtimeConfig.js
   develop-environment:
     build:
         context: .

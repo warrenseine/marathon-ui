@@ -67,7 +67,7 @@ describe("AppListItemComponent", function () {
         cpus: 4,
         totalCpus: 20.0000001,
         status: 0,
-        labels: {"SERVICE_SCHEME": "https"},
+        labels: {"MARATHON_SERVICE_SCHEME": "https"},
       };
 
       var component = render(
