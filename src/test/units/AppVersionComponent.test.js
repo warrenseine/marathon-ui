@@ -7,7 +7,7 @@ import AppVersionComponent
 
 describe("AppVersionComponent", function () {
 
-  before(function () {
+  beforeEach(function () {
     this.model = {
       "id": "/sleep10",
       "cmd": "sleep 10",
@@ -63,7 +63,7 @@ describe("AppVersionComponent", function () {
     this.rows = this.table.children();
   });
 
-  after(function () {
+  afterEach(function () {
     this.component.instance().componentWillUnmount();
   });
 
@@ -189,4 +189,16 @@ describe("AppVersionComponent", function () {
       .to.equal("c=C");
   });
 
+  it("has non empty uris", function () {
+    this.model.fetch = [{
+      uri: "http://localhost/test",
+      executable: false,
+      extract: false,
+      cache: false
+    }];
+    this.component = mount(<AppVersionComponent appVersion={this.model} />);
+    this.table = this.component.find("dl.dl-horizontal");
+    this.rows = this.table.children();
+    expect(this.rows.at(41).text().trim()).to.equal("http://localhost/test");
+  });
 });
