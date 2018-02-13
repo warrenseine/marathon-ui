@@ -143,7 +143,6 @@ var AppVersionComponent = React.createClass({
 
   render: function () {
     var appVersion = this.props.appVersion;
-
     var acceptedResourceRoles = (appVersion.acceptedResourceRoles == null ||
         appVersion.acceptedResourceRoles.length === 0)
       ? <UnspecifiedNodeComponent />
@@ -224,9 +223,12 @@ var AppVersionComponent = React.createClass({
       ? <UnspecifiedNodeComponent />
       : getHighlightNode(appVersion.networks);
 
-    var urisNode = (appVersion.uris == null || appVersion.uris.length === 0)
+    const uris = appVersion.fetch.map((fetch) => {
+      return fetch["uri"];
+    });
+    var urisNode = (uris == null || uris.length === 0)
       ? <UnspecifiedNodeComponent />
-      : appVersion.uris.map(function (uri, i) {
+      : uris.map(function (uri, i) {
         var parsedURI = url.parse(uri);
         var linkNode = uri;
 
@@ -282,7 +284,7 @@ var AppVersionComponent = React.createClass({
           {networksNode}
           <dt>Port Definitions</dt>
           {portDefinitionsNode}
-          <dt>Backoff Factor</dt>
+          <dt>Backoff Factors</dt>
           {invalidateValue(appVersion.backoffFactor)}
           <dt>Backoff</dt>
           {invalidateValue(appVersion.backoffSeconds, "seconds")}

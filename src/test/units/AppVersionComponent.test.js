@@ -32,6 +32,7 @@ describe("AppVersionComponent", function () {
       "executor": "",
       "constraints": [],
       "uris": [],
+      "fetch": [],
       "storeUrls": [],
       "requirePorts": false,
       "backoffSeconds": 1,
@@ -189,7 +190,7 @@ describe("AppVersionComponent", function () {
       .to.equal("c=C");
   });
 
-  it("has non empty uris", function () {
+  it("has one uri", function () {
     this.model.fetch = [{
       uri: "http://localhost/test",
       executable: false,
@@ -200,5 +201,24 @@ describe("AppVersionComponent", function () {
     this.table = this.component.find("dl.dl-horizontal");
     this.rows = this.table.children();
     expect(this.rows.at(41).text().trim()).to.equal("http://localhost/test");
+  });
+
+  it("has multiple uris", function () {
+    this.model.fetch = [{
+      uri: "http://localhost/test",
+      executable: false,
+      extract: false,
+      cache: false
+    }, {
+      uri: "http://localhost/test2",
+      executable: false,
+      extract: false,
+      cache: false
+    }];
+    this.component = mount(<AppVersionComponent appVersion={this.model} />);
+    this.table = this.component.find("dl.dl-horizontal");
+    this.rows = this.table.children();
+    expect(this.rows.at(41).text().trim()).to.equal("http://localhost/test");
+    expect(this.rows.at(42).text().trim()).to.equal("http://localhost/test2");
   });
 });
