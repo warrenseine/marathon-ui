@@ -27,6 +27,12 @@ var config = Object.assign({
   taskLogsLinkGenerator: function () {
     return "";
   },
+  // The generator build the exec links for tasks debugging
+  // input: the taskId
+  // output: the to the web terminal
+  debugLinkGenerator: function () {
+    return "";
+  },
   serviceDomain: "",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :
