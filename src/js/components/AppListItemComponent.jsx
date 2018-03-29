@@ -283,7 +283,7 @@ var AppListItemComponent = React.createClass({
           </li>
           <li>
             <a href="#" onClick={this.handleRestartApp}>
-              Restart
+              Application Restart
             </a>
           </li>
           <li className={disabledClassSet}>

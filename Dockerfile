@@ -11,5 +11,6 @@ USER root
 VOLUME "/opt/marathon-ui/tests"
 VOLUME "/opt/marathon-ui/dist"
 
-ENTRYPOINT ["npm"]
-CMD ["run", "serve"]
+RUN ["/usr/local/bin/npm", "install"]
+RUN ["/usr/local/bin/npm", "install","-g",  "gulp"]
+CMD ["npm", "run", "livereload"]

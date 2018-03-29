@@ -157,7 +157,7 @@ var TaskViewComponent = React.createClass({
           <button
               className="btn btn-sm btn-info"
               onClick={this.handleKillSelectedTasks.bind(this, true, false)}>
-            Kill &amp; Scale
+            Kill &amp; ScaleDown
           </button>
           {this.getKillAndWipeButton()}
         </div>
