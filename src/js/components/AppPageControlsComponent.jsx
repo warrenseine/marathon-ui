@@ -74,7 +74,7 @@ var AppPageControlsComponent = React.createClass({
         </button>
         <button className={restartAppClassSet}
             onClick={this.handleRestartApp}>
-          Restart
+          Application Restart
         </button>
         {this.getResetDelayButton()}
         <div className="dropdown app-controls">
