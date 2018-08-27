@@ -83,6 +83,7 @@ const validationRules = {
   "instances": [AppFormValidators.instances],
   "labels": [AppFormValidators.labels],
   "mem": [AppFormValidators.mem],
+  "networkBandwidth": [AppFormValidators.networkBandwidth],
   "portDefinitions": [
     AppFormValidators.portDefinitionsPortIsValid,
     AppFormValidators.portDefinitionsProtocolValidType
@@ -116,6 +117,7 @@ const resolveFieldIdToAppKeyMap = {
   executor: "executor",
   labels: "labels",
   mem: "mem",
+  networkBandwidth: "networkBandwidth",
   portDefinitions: "portDefinitions",
   uris: "uris",
   user: "user"
@@ -170,6 +172,7 @@ const responseAttributePathToFieldIdMap = {
     "healthChecks/{INDEX}/maxConsecutiveFailures",
   "/instances": "instances",
   "/mem": "mem",
+  "/networkBandwidth": "networkBandwidth",
   "/portDefinitions": "portDefinitions",
   "/portDefinitions({INDEX})/name": "portDefinitions/{INDEX}/name",
   "/portDefinitions({INDEX})/port": "portDefinitions/{INDEX}/port",

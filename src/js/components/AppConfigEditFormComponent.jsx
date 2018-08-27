@@ -251,6 +251,7 @@ var AppConfigEditFormComponent = React.createClass({
         cpus: "cpus",
         mem: "mem",
         disk: "disk",
+        networkBandwidth: "networkBandwidth",
         instances: "instances",
         cmd: "cmd"
       })
@@ -354,6 +355,14 @@ var AppConfigEditFormComponent = React.createClass({
                 <FormGroupComponent fieldId="disk" label="Disk Space (MiB)"
                   errorMessage={this.getErrorMessage("disk")}
                   value={state.fields.disk}
+                  onChange={this.handleFieldUpdate}>
+                  <input min="0" step="any" type="number"/>
+                </FormGroupComponent>
+              </div>
+              <div className="col-sm-3">
+                <FormGroupComponent fieldId="networkBandwidth" label="Network Bandwidth (Mbps)"
+                  errorMessage={this.getErrorMessage("networkBandwidth")}
+                  value={state.fields.bandwidth}
                   onChange={this.handleFieldUpdate}>
                   <input min="0" step="any" type="number"/>
                 </FormGroupComponent>
