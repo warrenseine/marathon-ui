@@ -6,7 +6,7 @@ export const AppConfigFormDefaultValues = Util.deepFreeze({
   cmd: "",
   cpus: 1,
   mem: 128,
-  disk: 0,
+  disk: 100,
   instances: 1
 });
 
@@ -16,7 +16,7 @@ export const AppConfigDefaultValues = Util.deepFreeze({
   cmd: null,
   cpus: 1,
   mem: 128,
-  disk: 0,
+  disk: 100,
   instances: 1
 });
 
