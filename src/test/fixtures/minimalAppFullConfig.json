@@ -8,6 +8,7 @@
   "cpus": 1,
   "mem": 128,
   "disk": 100,
+  "networkBandwidth": 50,
   "executor": "",
   "constraints": [],
   "uris": [],

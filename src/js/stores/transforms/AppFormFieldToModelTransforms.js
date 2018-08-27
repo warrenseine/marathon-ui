@@ -58,6 +58,7 @@ const AppFormFieldToModelTransforms = {
   },
   cpus: (value) => parseFloat(value),
   disk: (value) => parseFloat(value),
+  networkBandwidth: (value) => parseFloat(value),
   constraints: (constraints) => constraints
     .split(",")
     .filter((constraint) => constraint != null && constraint !== "")
