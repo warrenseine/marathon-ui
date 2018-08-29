@@ -23,6 +23,7 @@ const appScheme = {
   mem: null,
   networks: [],
   disk: null,
+  networkBandwidth: null,
   portDefinitions: [],
   fetch: [],
   user: null,
