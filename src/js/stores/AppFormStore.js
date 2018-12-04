@@ -84,6 +84,7 @@ const validationRules = {
   "labels": [AppFormValidators.labels],
   "mem": [AppFormValidators.mem],
   "networkBandwidth": [AppFormValidators.networkBandwidth],
+  "gpus": [AppFormValidators.gpus],
   "portDefinitions": [
     AppFormValidators.portDefinitionsPortIsValid,
     AppFormValidators.portDefinitionsProtocolValidType
@@ -118,6 +119,7 @@ const resolveFieldIdToAppKeyMap = {
   labels: "labels",
   mem: "mem",
   networkBandwidth: "networkBandwidth",
+  gpus: "gpus",
   portDefinitions: "portDefinitions",
   uris: "uris",
   user: "user"
@@ -173,6 +175,7 @@ const responseAttributePathToFieldIdMap = {
   "/instances": "instances",
   "/mem": "mem",
   "/networkBandwidth": "networkBandwidth",
+  "/gpus": "gpus",
   "/portDefinitions": "portDefinitions",
   "/portDefinitions({INDEX})/name": "portDefinitions/{INDEX}/name",
   "/portDefinitions({INDEX})/port": "portDefinitions/{INDEX}/port",

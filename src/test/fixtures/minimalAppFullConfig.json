@@ -9,6 +9,7 @@
   "mem": 128,
   "disk": 100,
   "networkBandwidth": 50,
+  "gpus": 0,
   "executor": "",
   "constraints": [],
   "uris": [],

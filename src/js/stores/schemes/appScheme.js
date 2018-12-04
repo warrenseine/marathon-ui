@@ -24,6 +24,7 @@ const appScheme = {
   networks: [],
   disk: null,
   networkBandwidth: null,
+  gpus: null,
   portDefinitions: [],
   fetch: [],
   user: null,
