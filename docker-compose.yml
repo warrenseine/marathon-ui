@@ -8,7 +8,7 @@ services:
       - "2181:2181"
     networks:
       app_net:
-        ipv4_address: 172.16.121.2
+        ipv4_address: 172.16.190.2
 
   mesos-master:
     image: mesosphere/mesos-master:1.4.1
@@ -17,7 +17,7 @@ services:
       - "5050:5050"
     networks:
       app_net:
-        ipv4_address: 172.16.121.3
+        ipv4_address: 172.16.190.3
     links:
       - zookeeper
     depends_on:
@@ -29,7 +29,7 @@ services:
       MESOS_HOSTNAME: localhost
       MESOS_WORK_DIR: /var/tmp/mesos
       MESOS_LOG_DIR: /var/log/mesos
-      LIBPROCESS_IP: 172.16.121.3
+      LIBPROCESS_IP: 172.16.190.3
 
   mesos-slave:
     image: mesosphere/mesos-slave:1.4.1
@@ -39,7 +39,7 @@ services:
       - "5051:5051"
     networks:
       app_net:
-        ipv4_address: 172.16.121.4
+        ipv4_address: 172.16.190.4
     links:
       - zookeeper:zookeeper
       - mesos-master:master.mesos
@@ -58,7 +58,7 @@ services:
       MESOS_FRAMEWORKS_HOME: /var/tmp/mesos/frameworks
       MESOS_IMAGE_PROVIDERS: docker
       MESOS_ISOLATION: filesystem/linux,docker/runtime
-      LIBPROCESS_IP: 172.16.121.4
+      LIBPROCESS_IP: 172.16.190.4
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
@@ -69,7 +69,7 @@ services:
     hostname: localhost
     networks:
       app_net:
-        ipv4_address: 172.16.121.5
+        ipv4_address: 172.16.190.5
     links:
       - zookeeper
       - mesos-master
@@ -80,7 +80,7 @@ services:
     environment:
       - MARATHON_ZK=zk://zookeeper:2181/marathon
       - MARATHON_MASTER=zk://zookeeper:2181/mesos
-      - LIBPROCESS_IP=172.16.121.5
+      - LIBPROCESS_IP=172.16.190.5
 
   marathon-ui:
     image: nginx:latest
@@ -89,7 +89,7 @@ services:
      - "8081:8080"
     networks:
       app_net:
-        ipv4_address: 172.16.121.6
+        ipv4_address: 172.16.190.6
     links:
       - marathon-service
     environment:
@@ -99,11 +99,11 @@ services:
       - ./dist:/usr/share/nginx/html
       - ./src/js/config/runtimeConfig.js:/usr/share/nginx/html/runtimeConfig.js
 
-  develop-environment:
+  devenv:
     hostname: localhost
     networks:
       app_net:
-        ipv4_address: 172.16.121.7
+        ipv4_address: 172.16.190.7
     links:
       - marathon-service
     environment:
@@ -125,4 +125,4 @@ networks:
       driver: default
       config:
       -
-        subnet: 172.16.121.0/24
+        subnet: 172.16.190.0/24
