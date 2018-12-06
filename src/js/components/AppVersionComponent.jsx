@@ -282,6 +282,8 @@ var AppVersionComponent = React.createClass({
           {invalidateValue(appVersion.disk, "MiB")}
           <dt>Network Bandwidth</dt>
           {invalidateValue(appVersion.networkBandwidth, "Mbps")}
+          <dt>GPUs</dt>
+          {invalidateValue(appVersion.gpus, "Device")}
           <dt>Networks</dt>
           {networksNode}
           <dt>Port Definitions</dt>

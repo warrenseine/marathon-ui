@@ -9,7 +9,9 @@ If you are familiar with npm and all the toolset, do whatever you are used to.
 
 For complete beginners (like me):
 - install docker-compose
-- run `docker-compose up -d`
+- edit your code 
+- run `npm run dist`
+- run `docker-compose up -d --build`
 - check `docker-compose ps`, everything should be up
 
 You can access marathon UI bundled with marathon on http://localhost:8080.
