@@ -371,7 +371,7 @@ var AppConfigEditFormComponent = React.createClass({
               </div>
               <div className="col-sm-3">
                 <FormGroupComponent fieldId="gpus"
-                                    label="GPU (Device)"
+                                    label="GPUs (Device)"
                                     errorMessage={this.getErrorMessage("gpus")}
                                     value={state.fields.gpus}
                                     onChange={this.handleFieldUpdate}>
