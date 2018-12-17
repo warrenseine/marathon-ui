@@ -11,6 +11,7 @@ import MesosActions from "../actions/MesosActions";
 import MesosEvents from "../events/MesosEvents";
 
 import Util from "../helpers/Util";
+import config from "../config/config";
 
 const FILES_TTL = 60000; // in ms
 const STATE_TTL = 60000;
@@ -226,7 +227,8 @@ function resolveTaskFileRequests() {
 
   if (!Util.isString(storeData.info.frameworkId) ||
       !Util.isObject(storeData.info.marathon_config) ||
-      !Util.isString(storeData.info.marathon_config.mesos_leader_ui_url)) {
+      !Util.isString(config.mesosLeaderUiUrl ||
+        storeData.info.marathon_config.mesos_leader_ui_url)) {
     storeData.info = null;
     updateRequest(INFO_ID, {error:true});
     resolveTaskFileRequests();
@@ -240,15 +242,17 @@ function resolveTaskFileRequests() {
 
   if (!storeData.version) {
     MesosActions.requestVersionInformation(
-      storeData.info.marathon_config.mesos_leader_ui_url.replace(/\/$/, ""));
+      (config.mesosLeaderUiUrl ||
+        storeData.info.marathon_config.mesos_leader_ui_url)
+        .replace(/\/$/, ""));
     return;
   }
 
   if (!MesosStore.getState(MASTER_ID)) {
     performRequest(MASTER_ID,
       () => MesosActions.requestState(MASTER_ID,
-        storeData.info.marathon_config
-          .mesos_leader_ui_url.replace(/\/?$/, "/master"),
+        (config.mesosLeaderUiUrl ||storeData.info.marathon_config
+          .mesos_leader_ui_url).replace(/\/?$/, "/master"),
         storeData.version),
       () => storeData.taskFileRequestQueue.forEach(rejectFileRequest));
     return;

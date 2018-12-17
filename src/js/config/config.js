@@ -15,6 +15,7 @@ var config = Object.assign({
     address: "localhost",
     port: 8181
   },
+  mesosLeaderUiUrl: null,
   // The generator building the logs links for applications
   // input: appId
   // output: the link to the logs
