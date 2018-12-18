@@ -3,6 +3,7 @@ import classNames from "classnames";
 import Mousetrap from "mousetrap";
 
 import AppsEvents from "../events/AppsEvents";
+import AppStatus from "../constants/AppStatus";
 import AppsStore from "../stores/AppsStore";
 import BreadcrumbComponent from "../components/BreadcrumbComponent";
 import AppHealthBarComponent from "./AppHealthBarComponent";
@@ -410,6 +411,14 @@ var AppPageComponent = React.createClass({
       );
     }
 
+    var deploymentTroublesDoc = (model.status !== AppStatus.RUNNING) ? (
+      <div className="doc-deployment-troubles">
+        <a href="https://confluence.criteois.com/x/FcLzFw" target="_blank">
+          Having troubles deploying?
+        </a>
+      </div>
+    ) : null;
+
     return (
       <div>
         <BreadcrumbComponent groupId={groupId}
@@ -421,6 +430,7 @@ var AppPageComponent = React.createClass({
             <h1>{name}</h1>
             {this.getVolumeStatus()}
             {appHealthStatus}
+            {deploymentTroublesDoc}
             {appHealthBar}
             {this.getControls()}
           </div>
