@@ -20,7 +20,7 @@ import TaskViewComponent from "../../js/components/TaskViewComponent";
 describe("AppPageComponent", function () {
 
   before(function (done) {
-    var app = Util.extendObject(appScheme, {
+    this.app = Util.extendObject(appScheme, {
       id: "/test-app-1",
       healthChecks: [{path: "/", protocol: "HTTP"}],
       status: AppStatus.RUNNING,
@@ -56,7 +56,7 @@ describe("AppPageComponent", function () {
       .get("/v2/apps//test-app-1")
       .query(true)
       .reply(200, {
-        app: app
+        app: this.app
       });
 
     var context = {
@@ -107,6 +107,52 @@ describe("AppPageComponent", function () {
   it("returns the right health message for healthy tasks", function () {
     expect(this.component.instance().getTaskHealthMessage("test-task-3"))
       .to.equal("Healthy");
+  });
+
+  describe("display link to the doc on status not running", function() {
+    describe("do not show troubleshooting doc when status is running.", function() {
+      before(function(done) {
+        this.app.tasksRunning = 1;
+        var context = {
+          router: {
+            getCurrentParams: function () {
+              return {
+                appId: "/test-app-1"
+              };
+            }
+          }
+        };
+
+        nock(config.apiURL)
+          .get("/v2/apps//test-app-1")
+          .query(true)
+          .reply(200, {
+            app: this.app
+          });
+    
+        AppsStore.once(AppsEvents.CHANGE, () => {
+          this.component = shallow(<AppPageComponent />, {context});
+          done();
+        });
+    
+        AppsActions.requestApp("/test-app-1");
+      });
+
+      after(function () {
+        this.app.tasksRunning = 0;
+        this.component.instance().componentWillUnmount();
+      });
+      
+      it("does not return the troubleshooting doc when status is running", function () {
+        expect(this.component.find(".doc-deployment-troubles").get(0)).to.be.undefined;
+      });
+    });
+
+    describe("show troubleshooting doc when status is not running", function() { 
+      it("returns the troubleshooting doc when status is not running", function () {
+        expect(this.component.find(".doc-deployment-troubles").get(0)).not.to.be.undefined;
+      });
+    });
   });
 
   describe("on unauthorized access error", function () {
