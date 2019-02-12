@@ -1,6 +1,7 @@
 import lazy from "lazy.js";
 import React from "react/addons";
 
+import config from "../config/config";
 import AppsActions from "../actions/AppsActions";
 import DialogActions from "../actions/DialogActions";
 import DialogStore from "../stores/DialogStore";
@@ -25,7 +26,7 @@ var TaskViewComponent = React.createClass({
   getInitialState: function () {
     return {
       currentPage: 0,
-      itemsPerPage: 8,
+      itemsPerPage: config.taskPageSize,
       selectedTasks: {}
     };
   },
