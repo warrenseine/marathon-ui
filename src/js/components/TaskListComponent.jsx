@@ -27,7 +27,7 @@ var TaskListComponent = React.createClass({
   getInitialState: function () {
     return {
       sortKey: "updatedAt",
-      sortDescending: false
+      sortDescending: true
     };
   },
 
