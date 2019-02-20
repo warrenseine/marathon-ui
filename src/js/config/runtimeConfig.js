@@ -11,7 +11,7 @@ var runtimeConfig = {
 
   // The generator building the logs links for tasks
   taskLogsLinkGenerator: function (appId, taskId) {
-    return "http://logs-store-like-kibana/?appId=" + appId.substring(1) + "&taskId=" + taskId;
-  },
-  mesosLeaderUiUrl: "https://mesos/",
+    return "http://logs-store-like-kibana/?appId=" +
+      appId.substring(1) + "&taskId=" + taskId;
+  }
 };
