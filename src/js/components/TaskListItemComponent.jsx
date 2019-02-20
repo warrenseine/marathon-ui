@@ -173,8 +173,9 @@ var TaskListItemComponent = React.createClass({
   },
 
   getSandboxLink: function () {
+    var icon =  (<div className="icon icon-mini sandbox"></div>);
     return (<TaskMesosUrlComponent task={this.props.task}
-                                   text="Mesos link"/>);
+                                   text={icon} />);
   },
 
   getDebugLink: function () {
