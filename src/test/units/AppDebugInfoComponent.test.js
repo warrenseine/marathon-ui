@@ -88,8 +88,9 @@ describe("App debug info component", function () {
           expect(host).to.equal("slave1.dcos.io");
           expect(timestamp).to.equal("2015-08-05T09:08:56.349Z");
           expect(version).to.equal("2015-07-06T12:37:28.774Z");
-          expect(details).to.equal(info.marathon_config.mesos_leader_ui_url + "/#/slaves/" +
-            task.slaveId + "/frameworks/framework1/executors/" + task.taskId);
+          expect(details).to.equal(info.marathon_config.mesos_leader_ui_url +
+            "/#/agents/" + task.slaveId + "/frameworks/framework1/executors/"
+            + task.taskId + "/tasks/" + task.taskId + "/browse");
         }, done);
       });
 
@@ -123,8 +124,10 @@ describe("App debug info component", function () {
 
           var details = nodes.at(6).find("a").at(0).props().href;
 
-          expect(details).to.equal(info.marathon_config.mesos_leader_ui_url + "/#/slaves/" +
-            task.slaveId + "/frameworks/framework1/executors/marathon-" + task.taskId);
+          expect(details).to.equal(info.marathon_config.mesos_leader_ui_url +
+            "/#/agents/" + task.slaveId +
+            "/frameworks/framework1/executors/marathon-" + task.taskId +
+            "/tasks/marathon-" + task.taskId + "/browse");
         }, done);
       });
 

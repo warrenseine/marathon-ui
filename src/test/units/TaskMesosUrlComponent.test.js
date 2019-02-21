@@ -47,8 +47,8 @@ describe("TaskMesosUrlComponent", function () {
   it("has the correct mesos task url", function () {
     var url = this.component.props().href;
     expect(url).to.equal(
-      "http://leader1.dcos.io:5050/#/slaves/20150720-125149-3839899402-5050-" +
-      "16758-S1/frameworks/framework1/executors/task-123"
+      "http://leader1.dcos.io:5050/#/agents/20150720-125149-3839899402-5050-" +
+      "16758-S1/frameworks/framework1/executors/task-123/tasks/task-123/browse"
     );
   });
 
@@ -58,8 +58,9 @@ describe("TaskMesosUrlComponent", function () {
 
       var url = this.component.props().href;
       expect(url).to.equal(
-        "http://leader1.dcos.io:5050/#/slaves/20150720-125149-3839899402-" +
-        "5050-16758-S1/frameworks/framework1/executors/task-123"
+        "http://leader1.dcos.io:5050/#/agents/20150720-125149-3839899402-" +
+        "5050-16758-S1/frameworks/framework1/executors/task-123/" +
+        "tasks/task-123/browse"
       );
     });
 
@@ -77,8 +78,9 @@ describe("TaskMesosUrlComponent", function () {
 
         var url = this.component.props().href;
         expect(url).to.equal(
-          "http://leader1.dcos.io:5050/#/slaves/20150720-125149-3839899402-" +
-          "5050-16758-S1/frameworks/framework1/executors/marathon-task-123"
+          "http://leader1.dcos.io:5050/#/agents/20150720-125149-3839899402-" +
+          "5050-16758-S1/frameworks/framework1/executors/marathon-task-123" +
+          "/tasks/marathon-task-123/browse"
         );
       });
 
@@ -96,8 +98,9 @@ describe("TaskMesosUrlComponent", function () {
 
           var url = this.component.props().href;
           expect(url).to.equal(
-            "http://leader1.dcos.io:5050/#/slaves/20150720-125149-3839899402-" +
-            "5050-16758-S1/frameworks/framework1/executors/task-123"
+            "http://leader1.dcos.io:5050/#/agents/20150720-125149-3839899402-" +
+            "5050-16758-S1/frameworks/framework1/executors/task-123" +
+            "/tasks/task-123/browse"
           );
         });
 });

@@ -8,6 +8,7 @@ import HealthStatus from "../constants/HealthStatus";
 import TaskStatus from "../constants/TaskStatus";
 import Config from "../config/config";
 import ServiceSchemeUtil from "../helpers/ServiceSchemeUtil";
+import TaskMesosUrlComponent from "./TaskMesosUrlComponent";
 
 function joinNodes(nodes, separator = ", ") {
   var lastIndex = nodes.length - 1;
@@ -171,6 +172,12 @@ var TaskListItemComponent = React.createClass({
     </a>);
   },
 
+  getSandboxLink: function () {
+    var icon =  (<div className="icon icon-mini sandbox"></div>);
+    return (<TaskMesosUrlComponent task={this.props.task}
+                                   text={icon} />);
+  },
+
   getDebugLink: function () {
     const debugLink = Config.debugLinkGenerator(this.props.task.id);
     return (<a href={debugLink} target="_blank">
@@ -267,6 +274,9 @@ var TaskListItemComponent = React.createClass({
         </td>
         <td className="text-center">
           {this.getLogsLink()}
+        </td>
+        <td className="text-center">
+          {this.getSandboxLink()}
         </td>
         <td className="text-center">
           {this.getDebugLink()}

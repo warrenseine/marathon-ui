@@ -51,12 +51,15 @@ var TaskMesosUrlComponent = React.createClass({
         masterUrl = masterUrl.replace(/\/?$/, "/");
         return [
           masterUrl,
-          "#/slaves/",
+          "#/agents/",
           task.slaveId,
           "/frameworks/",
           frameworkId,
           "/executors/",
-          ExecutorUtil.calculateExecutorId(task)
+          ExecutorUtil.calculateExecutorId(task),
+          "/tasks/",
+          ExecutorUtil.calculateExecutorId(task),
+          "/browse"
         ].join("");
       }
     }
