@@ -5,7 +5,7 @@
     <desc>Created with Sketch.</desc>
     <defs></defs>
     <g id="Icons/Mini" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
-        <g id="icon-mini-folder-stroke-open" sketch:type="MSArtboardGroup" fill="#000000">
+        <g id="icon-mini-folder-stroke-open" sketch:type="MSArtboardGroup" fill="#fff">
             <path d="M7.547,3 L15.5,3 C15.776,3 16,3.229 16,3.5 L16,14.5 C16,14.776 15.768,15 15.5,15 L0.5,15 C0.224,15 0,14.78 0,14.502 L0,1.498 C0,1.223 0.232,1 0.5,1 C0.5,1 4.555,1.007 5.488,1.004 C6.42,1 6.946,1.563 7.229,2.236 L7.547,3 Z" id="Background" fill-opacity="0.4" sketch:type="MSShapeGroup"></path>
             <path d="M15,13.9997559 L15,14.9997559 L1,14.9997559 L1,13.9997559 L15,13.9997559 L15,13.9997559 Z" id="Bottom" sketch:type="MSShapeGroup"></path>
             <rect id="Right" sketch:type="MSShapeGroup" x="15" y="3" width="1" height="12"></rect>
