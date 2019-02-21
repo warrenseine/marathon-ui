@@ -98,18 +98,6 @@ var AppListFilterComponent = React.createClass({
     this.updateFilters(FilterTypes.TEXT, filterText);
   },
 
-  handleKeyDown: function (event) {
-    switch (event.key) {
-      case "Escape":
-        event.target.blur();
-        this.handleClearFilterText();
-        break;
-      case "Enter":
-        this.handleSubmit(event);
-        break;
-    }
-  },
-
   focusInputGroup: function () {
     this.setState({
       focused: true,
@@ -144,7 +132,7 @@ var AppListFilterComponent = React.createClass({
           onBlur={this.blurInputGroup}
           onChange={this.handleFilterTextChange}
           onFocus={this.focusInputGroup}
-          onKeyDown={this.handleKeyDown}
+          onKeyUp={this.handleSubmit}
           placeholder="Search all applications"
           type="text"
           ref="filterText"
