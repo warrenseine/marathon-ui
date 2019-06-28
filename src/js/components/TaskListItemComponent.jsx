@@ -178,6 +178,14 @@ var TaskListItemComponent = React.createClass({
                                    text={icon} />);
   },
 
+  getMonitoringTaskLink: function () {
+    const Link = Config.taskMonitoringLinkGenerator(this.props.appId,
+      this.props.task);
+    return (<a href={Link} target="_blank">
+      <div className="icon icon-mini monitoring"></div>
+    </a>);
+  },
+
   getDebugLink: function () {
     const debugLink = Config.debugLinkGenerator(this.props.task.id);
     return (<a href={debugLink} target="_blank">
@@ -277,6 +285,9 @@ var TaskListItemComponent = React.createClass({
         </td>
         <td className="text-center">
           {this.getSandboxLink()}
+        </td>
+        <td className="text-center">
+          {this.getMonitoringTaskLink()}
         </td>
         <td className="text-center">
           {this.getDebugLink()}

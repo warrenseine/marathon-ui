@@ -14,6 +14,11 @@ var runtimeConfig = {
     return "http://logs-store-like-kibana/?appId=" + appId.substring(1) + "&taskId=" + taskId;
   },
 
+  // The generator building the monitoring links for tasks
+  taskMonitoringLinkGenerator: function (appId, task) {
+    return "" + appId.substring(1) + "&taskId=" + task.host;
+  },
+
   // The generator building the web terminal link for debugging tasks
   debugLinkGenerator: function (taskId) {
     return "http://webterminal/?taskId=" + taskId;
