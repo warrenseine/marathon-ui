@@ -233,6 +233,9 @@ var TaskListComponent = React.createClass({
                 Sandbox
               </th>
               <th className="text-center">
+                Monitoring
+              </th>
+              <th className="text-center">
                 Debug
               </th>
               <th className={versionClassSet}>
