@@ -163,11 +163,6 @@ var AppPageComponent = React.createClass({
       fetchState: States.STATE_SUCCESS,
       tabs: state.tabs
     });
-
-    if (state.view === "configuration") {
-      AppVersionsActions.requestAppVersions(state.appId);
-      AppVersionsActions.requestAppVersion(state.appId, app.version);
-    }
   },
 
   onAppRequestError: function (message, statusCode) {
