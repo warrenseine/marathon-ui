@@ -20,6 +20,7 @@ var TaskViewComponent = React.createClass({
     getTaskHealthMessage: React.PropTypes.func.isRequired,
     hasHealth: React.PropTypes.bool,
     labels: React.PropTypes.object.isRequired,
+    portDefinitions: React.PropTypes.object.isRequired,
     tasks: React.PropTypes.array.isRequired
   },
 
@@ -231,6 +232,7 @@ var TaskViewComponent = React.createClass({
           onTaskToggle={this.onTaskToggle}
           itemsPerPage={this.state.itemsPerPage}
           labels={this.props.labels}
+          portDefinitions={this.props.portDefinitions}
           selectedTasks={this.state.selectedTasks}
           tasks={this.props.tasks}
           toggleAllTasks={this.toggleAllTasks} />
