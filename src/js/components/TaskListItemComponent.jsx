@@ -24,6 +24,18 @@ function joinNodes(nodes, separator = ", ") {
   });
 }
 
+function getPortDecoration(portDefinitions, index, port) {
+  const LABEL_NAME = "name";
+  if (portDefinitions == null || portDefinitions[index] == null) {
+    return port;
+  }
+  if (LABEL_NAME in portDefinitions[index]) {
+    return portDefinitions[index][LABEL_NAME];
+  } else {
+    return port;
+  }
+}
+
 var TaskListItemComponent = React.createClass({
   displayName: "TaskListItemComponent",
 
@@ -33,6 +45,7 @@ var TaskListItemComponent = React.createClass({
     isActive: React.PropTypes.bool.isRequired,
     labels: React.PropTypes.object.isRequired,
     onToggle: React.PropTypes.func.isRequired,
+    portDefinitions: React.PropTypes.object.isRequired,
     sortKey: React.PropTypes.string,
     task: React.PropTypes.object.isRequired,
     taskHealthMessage: React.PropTypes.string
@@ -50,11 +63,12 @@ var TaskListItemComponent = React.createClass({
     if (ports != null && ports.length === 1) {
       const scheme = ServiceSchemeUtil
         .getServiceSchemeFromLabels(props.labels, 0);
+      const name = getPortDecoration(props.portDefinitions, 0, ports[0]);
       return (
         <a className="text-muted"
             href={`${scheme}://${task.host}:${ports[0]}`}
             target="_blank">
-          {`${task.host}:${ports[0]}`}
+          {`${task.host}:${name}`}
         </a>
       );
     }
@@ -63,12 +77,13 @@ var TaskListItemComponent = React.createClass({
       let portNodes = ports.map(function (port, i) {
         const scheme = ServiceSchemeUtil
           .getServiceSchemeFromLabels(props.labels, i);
+        const name = getPortDecoration(props.portDefinitions, i, port);
         return (
           <a key={`${task.host}:${port}`}
               className="text-muted"
               href={`${scheme}://${task.host}:${port}`}
               target="_blank">
-            {port}
+            {name}
           </a>
         );
       });
