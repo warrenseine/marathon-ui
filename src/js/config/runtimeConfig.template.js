@@ -19,6 +19,11 @@ var runtimeConfig = {
     return "" + appId.substring(1) + "&taskId=" + task.host;
   },
 
+  // The generator building the traffic dump link for tasks
+  taskTrafficDumpLinkGenerator: function (appId, task) {
+    return "http://some-traffic-dump-tool/" + task.host;
+  },
+
   // The generator building the web terminal link for debugging tasks
   debugLinkGenerator: function (taskId) {
     return "http://webterminal/?taskId=" + taskId;

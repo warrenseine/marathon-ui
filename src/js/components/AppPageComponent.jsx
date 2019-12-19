@@ -165,7 +165,7 @@ var AppPageComponent = React.createClass({
       tabs: state.tabs
     });
 
-	if (state.view === "configuration") {
+    if (state.view === "configuration") {
       AppVersionsActions.requestAppVersions(state.appId);
       AppVersionsActions.requestAppVersion(state.appId, app.version);
     }

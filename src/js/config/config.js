@@ -29,12 +29,20 @@ var config = Object.assign({
     return "";
   },
 
-  // The generator building the logs links for tasks
+  // The generator building the monitoring link for tasks
   // input: appId, taskId
   // output: the link to the logs
   taskMonitoringLinkGenerator: function () {
     return "";
   },
+
+  // The generator building the traffic dump link for tasks
+  // input: appId, taskId
+  // output: the link to the logs
+  taskTrafficDumpLinkGenerator: function () {
+    return "";
+  },
+
   // Size of page size on task list
   taskPageSize: 8,
   // The generator build the exec links for tasks debugging
