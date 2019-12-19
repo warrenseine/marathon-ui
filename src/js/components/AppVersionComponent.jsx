@@ -78,9 +78,9 @@ var AppVersionComponent = React.createClass({
   },
 
   componentDidUpdate: function () {
-	// Do not trigger highlightNodes for each update as it creates 
+	// Do not trigger highlightNodes for each update as it creates
 	// nested spans which blows out the HTML DOM!
-	// side effects: if a new configuration is received it may not 
+	// side effects: if a new configuration is received it may not
 	// be highlighted correctly but still readable.
     // this.highlightNodes();
   },

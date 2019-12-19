@@ -186,76 +186,79 @@ var TaskListComponent = React.createClass({
       <div>
         <div className={errorClassSet}>
           <p className="text-center text-danger">
-            {`Error fetching tasks. ${Messages.RETRY_REFRESH}`}
+              {`Error fetching tasks. ${Messages.RETRY_REFRESH}`}
           </p>
         </div>
         <div className={unauthorizedClassSet}>
           <p className="text-center text-danger">
-            {`Error fetching tasks. ${Messages.UNAUTHORIZED}`}
+              {`Error fetching tasks. ${Messages.UNAUTHORIZED}`}
           </p>
         </div>
         <div className={forbiddenClassSet}>
           <p className="text-center text-danger">
-            {`Error fetching tasks. ${Messages.FORBIDDEN}`}
+              {`Error fetching tasks. ${Messages.FORBIDDEN}`}
           </p>
         </div>
         <table className="table table-unstyled task-list">
           <thead>
             <tr>
               <th className={headerClassSet}
-                  width="1"
-                  onClick={this.handleThToggleClick}>
-                <input type="checkbox"
-                  checked={this.allTasksSelected(tasksLength)}
-                  disabled={tasksLength === 0}
-                  onChange={props.toggleAllTasks} />
-              </th>
-              <th className={idClassSet}>
-                <span onClick={this.sortBy.bind(null, "host")}
-                    className={headerClassSet}>
-                  ID {this.getCaret("host")}
-                </span>
-              </th>
-              <th className={hasHealthClassSet}>
-                <span onClick={this.sortBy.bind(null, "healthStatus")}
-                    className={headerClassSet}>
-                  Health {this.getCaret("healthStatus")}
-                </span>
-              </th>
-              <th className={statusClassSet}>
-                <span onClick={this.sortBy.bind(null, "status")}
-                    className={headerClassSet}>
-                  Status {this.getCaret("status")}
-                </span>
-              </th>
-              <th className="text-center">
-                Logs
-              </th>
-              <th className="text-center">
-                Sandbox
-              </th>
-              <th className="text-center">
-                Monitoring
-              </th>
-              <th className="text-center">
-                Debug
-              </th>
-              <th className={versionClassSet}>
-                <span onClick={this.sortBy.bind(null, "version")}
-                    className={headerClassSet}>
-                  {this.getCaret("version")} Version
-                </span>
-              </th>
-              <th className={updatedAtClassSet}>
-                <span onClick={this.sortBy.bind(null, "updatedAt")}
-                    className={headerClassSet}>
-                  {this.getCaret("updatedAt")} Updated
-                </span>
-              </th>
-            </tr>
+                width="1"
+                onClick={this.handleThToggleClick}>
+              <input type="checkbox"
+                checked={this.allTasksSelected(tasksLength)}
+                disabled={tasksLength === 0}
+                onChange={props.toggleAllTasks} />
+            </th>
+            <th className={idClassSet}>
+              <span onClick={this.sortBy.bind(null, "host")}
+                className={headerClassSet}>
+                ID {this.getCaret("host")}
+            </span>
+          </th>
+          <th className={hasHealthClassSet}>
+            <span onClick={this.sortBy.bind(null, "healthStatus")}
+              className={headerClassSet}>
+              Health {this.getCaret("healthStatus")}
+          </span>
+        </th>
+        <th className={statusClassSet}>
+          <span onClick={this.sortBy.bind(null, "status")}
+            className={headerClassSet}>
+            Status {this.getCaret("status")}
+        </span>
+      </th>
+      <th className="text-center">
+          Logs
+      </th>
+      <th className="text-center">
+          Sandbox
+      </th>
+      <th className="text-center">
+          Monitoring
+      </th>
+      <th className="text-center">
+          Traffic dump
+      </th>
+      <th className="text-center">
+          Debug
+      </th>
+      <th className={versionClassSet}>
+        <span onClick={this.sortBy.bind(null, "version")}
+          className={headerClassSet}>
+          {this.getCaret("version")} Version
+      </span>
+    </th>
+    <th className={updatedAtClassSet}>
+      <span onClick={this.sortBy.bind(null, "updatedAt")}
+        className={headerClassSet}>
+        {this.getCaret("updatedAt")} Updated
+    </span>
+  </th>
+</tr>
           </thead>
           <tbody>
-            {this.getTasks()}
+              {this.getTasks()}
           </tbody>
         </table>
         {this.getInlineDialog()}
