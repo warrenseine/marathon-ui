@@ -34,7 +34,7 @@ services:
   mesos-slave:
     image: mesosphere/mesos-slave:1.7.1
     privileged: true
-    hostname: localhost
+    hostname: mesos-slave
     ports:
       - "5051:5051"
     networks:
@@ -51,7 +51,7 @@ services:
       MESOS_CONTAINERIZERS: mesos,docker
       MESOS_PORT: 5051
       MESOS_RESOURCES: ports(*):[11000-11999]
-      MESOS_HOSTNAME: localhost
+      MESOS_HOSTNAME: mesos-slave
       MESOS_WORK_DIR: /var/tmp/mesos
       MESOS_LOG_DIR: /var/log/mesos
       MESOS_SYSTEMD_ENABLE_SUPPORT: "false"
@@ -63,7 +63,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
 
   marathon-service:
-    image: mesosphere/marathon:v1.9.109
+    image: mesosphere/marathon:v1.6.587
     ports:
       - "8080:8080"
     hostname: localhost
@@ -73,6 +73,7 @@ services:
     links:
       - zookeeper
       - mesos-master
+      - mesos-slave
     depends_on:
       - zookeeper
       - mesos-master
