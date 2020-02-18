@@ -41,6 +41,12 @@ var TaskMesosUrlComponent = React.createClass({
 
   buildUrl: function (task, info) {
     if (typeof task !== "undefined" && typeof info !== "undefined") {
+      var executorId = ExecutorUtil.calculateExecutorId(task);
+      var sandboxUrl = config.taskSandboxLinkGenerator(executorId);
+      if (sandboxUrl) {
+        return sandboxUrl;
+      }
+      // default behavior if not overriden by configuration
       if (info.hasOwnProperty("marathon_config")) {
         var masterUrl = config.mesosLeaderUiUrl ||
           info.marathon_config.mesos_leader_ui_url;
@@ -76,7 +82,7 @@ var TaskMesosUrlComponent = React.createClass({
       );
     }
     return (
-      <a href={mesosTaskUrl} target="_blank">{text ? text : "link"}</a>
+      <a href={mesosTaskUrl} target="_blank">{text ? text : "mesos sandbox"}</a>
     );
   }
 });
