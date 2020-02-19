@@ -1,18 +1,19 @@
 language: node_js
 before_install:
-  - npm cache clear
-  - npm install -g gulp
+- npm cache clear
+- npm install -g gulp
 node_js:
-  - "5.4.1"
+- 5.4.1
 script: npm run dist
 after_success: npm run cover:report
 before_deploy:
-  - cd dist && zip -r marathon-ui-${TRAVIS_TAG}.zip .
+- cd dist && zip -r marathon-ui-${TRAVIS_TAG}.zip .
 deploy:
   provider: releases
   skip_cleanup: true
   file: marathon-ui-${TRAVIS_TAG}.zip
   api_key:
-    secure: "hD1jfRR84orOSeP2o1NXih49EK9fjJavmTuYxYD2w2nS4sn4/ok8oTdEHeBaAn8PyD763RDJNEKH0TELM3fMFywYpQDnzxzpCmPTrn3fNZINaJFlrXoIjWyQsX8H2DCb9tj7Yt9xNRxLwiecPxBTiXPew5KKjFx0CIxqAlXwcPmNjtNAqfRqEDx2f8vB9xwQdNPXZpjBZSBtOFX+P8o628vDjEcF3uxGgpw85/kUkbksGGsvrnB5eEywpIJ3QI2PaZTSFWrr7HbWl6NuH2YLZkNHm2muXqJYdTw9DqQUBpG5UoP2ep/re67PmfJCrCyV+sWMiEbJegxr7fwVU6Xr1M+gmLdqD1JhaKSGSfiEXaA8zUw1F//2Nw4UbIXf9clcB6E9vymqAkmrxUUPoZUOFZQFd8rk4A/Ag99hWqYnYGVS+hbt2iYHx6dnMwAy9yqmLKUUhxHJwRHv9z3lehhjNYcxT2/IQX0Uv5MpQSpBFxahyHgRxDQLPO7BP4KObwgseiEOF34jiU5I8TyEDmwV2AJ1TQ0FQ1T5M28v+GlhYUcsQwjw52qIGnfA66y47lrp49+QFKlOcCqVtjHvdn7hTjCWD6m6KkgrIE8NkEEu8yH/ftHMft8Cxes1H9uGcQGncHFCh9noEQfPafzyZPQa4gmso6jLLT+W63ycQV09qAc="
+    secure: BILeiuw0gpd/gC5gqZhkOv8t//pUkiQ9qHUJkNBdSI1lHmUd0IdPjYOHi9N3Y4zumTUYjkXBt8u+wnMEZFruWvWtUX5chtATZBZICMsTsXkMhydBqCijZhsP0PdslVegq9qXeakFcGZ8vHQnOA04+GYfse1cInlUV5FbXFofeAidK40jnklSPTOwWuCUGaXQAWNFe54rHrgzSN31c8W8Fwk+hiNdeaYsbXnML4fwputq/RuZSQ+nP9+TfqYu3Ce42a557fKWmynF2M8n3PAHUXN7EvaOQcr7NNTFj5WKEr5dPMSYaIiG906y7vMANpuRyKhyFNajzClu8H1mtaWjCzEx0BFOOFn4cz19B6xxPIC8Yjw/NiF5e4hL7qwZR1/MiT35q+MN+5a1PrhLBBxrG4gUBKZJ/FW1ZPbmnt+vv9L9WVd/yyLSfNMs1LU1kUSuQBCNvP9G/VRKugp3RNhv4G6vMURVLRbTkSgtkhmIfUgz7eQB0ZY1Fo9rgav9d+a5deusS9OGVGndPRMq3LIdFCUPNU6vmRslmtWih/m5YOrmsZbygc2WL1cuuEBtxjKthcDpr3uZ976PM0u1t/usG+didLqqauxf9fL1EpRgCVuOeF66YI3kUkEj6EbCaqOiezPxExgPdVAkmrE52V7JDSZ2EobGq2o7dGHCU+T1hn0=
   on:
+    repo: criteo-forks/marathon-ui
     tags: true
