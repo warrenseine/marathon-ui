@@ -19,5 +19,9 @@ var runtimeConfig = {
   taskMonitoringLinkGenerator: function (appId, task) {
     return "http://logs-store-like-kibana/?appId=" +
       appId.substring(1) + "&taskId=" + task.host ;
+  },
+  taskSandboxLinkGenerator: function (executorId) {
+    return "http://mesos-sandbox-ui/?executorId=" + executorId;
   }
+
 };

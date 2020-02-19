@@ -27,5 +27,13 @@ var runtimeConfig = {
   // The generator building the web terminal link for debugging tasks
   debugLinkGenerator: function (taskId) {
     return "http://webterminal/?taskId=" + taskId;
-  }
+  },
+
+  // The generator building link to sandbox to override
+  // default urls (pointing to mesos leader ui)
+  // It returns a url
+  taskSandboxLinkGenerator: function (executorId) {
+    return null;
+  },
+
 };

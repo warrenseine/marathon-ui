@@ -92,8 +92,6 @@ var AppDebugInfoComponent = React.createClass({
         </dd>
         <dt>Mesos details</dt>
         <dd><TaskMesosUrlComponent task={lastTaskFailure}/>
-          <TaskFileDownloadComponent task={lastTaskFailure} fileName="stderr" />
-          <TaskFileDownloadComponent task={lastTaskFailure} fileName="stdout" />
         </dd>
       </dl>
     );

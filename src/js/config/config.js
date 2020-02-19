@@ -51,6 +51,13 @@ var config = Object.assign({
   debugLinkGenerator: function () {
     return "";
   },
+  // The generator building link to sandbox to override
+  // default urls (pointing to mesos leader ui)
+  // It returns a url
+  taskSandboxLinkGenerator: function (executorId) {
+    return null;
+  },
+
   serviceDomain: "",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :
