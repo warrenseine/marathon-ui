@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import React from "react/addons";
 import Moment from "moment";
 
@@ -70,23 +71,36 @@ var AppDebugInfoComponent = React.createClass({
     const timeStampText = new Date(timestamp) > new Date()
       ? "Just now"
       : new Moment(timestamp).fromNow();
+    const secondsSinceLastFailure = (new Date() - new Date(timestamp)) / 1000;
+    // adapt color based on information recency.
+    // Old timestamps means information is less relevant but many users
+    // don't see it. So we mark it anyway
+    var timestampTextColor = "recent";
+    if (secondsSinceLastFailure > 86400) {
+      timestampTextColor = "veryold";
+    } else if (secondsSinceLastFailure > 600) {
+      timestampTextColor = "old";
+    }
+
+    var timestampClassSet = classNames("timestamp-color", timestampTextColor);
     const version = lastTaskFailure.version;
 
     return (
       <dl className="dl-horizontal flush-bottom">
         <dt>Task id</dt>
         {invalidateValue(lastTaskFailure.taskId)}
-        <dt>State</dt>
+        <dt>Task State</dt>
         {invalidateValue(lastTaskFailure.state)}
         <dt>Message</dt>
         {invalidateValue(lastTaskFailure.message)}
         <dt>Host</dt>
         {invalidateValue(lastTaskFailure.host)}
-        <dt>Timestamp</dt>
+        <dt>Failure timestamp</dt>
         <dd>
-          <span>{timestamp}</span> ({timeStampText})
+          <span>{timestamp}</span>&nbsp;
+           (<span className={timestampClassSet}>{timeStampText}</span>)
         </dd>
-        <dt>Version</dt>
+        <dt>Configuration Version</dt>
         <dd>
           <span>{version}</span> ({new Moment(version).fromNow()})
         </dd>
