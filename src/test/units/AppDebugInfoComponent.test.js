@@ -77,7 +77,6 @@ describe("App debug info component", function () {
           var state = nodes.at(1).text().trim();
           var message = nodes.at(2).text().trim();
           var host = nodes.at(3).text().trim();
-          var timestamp = nodes.at(4).find("span").text().trim();
           var version = nodes.at(5).find("span").text().trim();
           var details = nodes.at(6).find("a").at(0).props().href;
 
@@ -86,7 +85,6 @@ describe("App debug info component", function () {
           expect(state).to.equal("TASK_LOST");
           expect(message).to.equal("Slave slave1.dcos.io removed");
           expect(host).to.equal("slave1.dcos.io");
-          expect(timestamp).to.equal("2015-08-05T09:08:56.349Z");
           expect(version).to.equal("2015-07-06T12:37:28.774Z");
           expect(details).to.equal(info.marathon_config.mesos_leader_ui_url +
             "/#/agents/" + task.slaveId + "/frameworks/framework1/executors/"
