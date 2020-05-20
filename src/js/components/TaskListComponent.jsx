@@ -207,7 +207,7 @@ var TaskListComponent = React.createClass({
                 onClick={this.handleThToggleClick}>
               <input type="checkbox"
                 checked={this.allTasksSelected(tasksLength)}
-                disabled={true}
+                disabled={tasksLength === 0}
                 onChange={props.toggleAllTasks} />
             </th>
             <th className={idClassSet}>

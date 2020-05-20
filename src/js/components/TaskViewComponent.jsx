@@ -63,8 +63,25 @@ var TaskViewComponent = React.createClass({
     }).compact().value();
 
     if (scaleTask) {
-      TasksActions.deleteTasksAndScale(props.appId, taskIds);
-      this.setState({selectedTasks: {}});
+      const dialogId = DialogActions.confirm({
+        actionButtonLabel: "Kill and Scale Down",
+        message: (
+          <div>
+            <p>This will kill all {taskIds.length} selected tasks without restarting them
+            </p>
+            <p>
+              Are you sure you want to continue?
+            </p>
+          </div>
+        ),
+        severity: DialogSeverity.WARNING,
+        title: "Kill and Scale Down"
+      });
+
+      DialogStore.handleUserResponse(dialogId, () => {
+        TasksActions.deleteTasksAndScale(props.appId, taskIds);
+        this.setState({selectedTasks: {}});
+      });
       return;
     }
 
@@ -73,7 +90,7 @@ var TaskViewComponent = React.createClass({
         actionButtonLabel: "Kill and Wipe",
         message: (
           <div>
-            <p>This will kill all selected tasks and wipe the respective
+            <p>This will kill all {taskIds.length} selected tasks and wipe the respective
               local volumes. <a href={ExternalLinks.LOCAL_VOLUMES}
                 target="_blank"
                 className="modal-body-link">
@@ -97,8 +114,25 @@ var TaskViewComponent = React.createClass({
       return;
     }
 
-    TasksActions.deleteTasks(props.appId, taskIds, false);
-    this.setState({selectedTasks: {}});
+    const dialogId = DialogActions.confirm({
+      actionButtonLabel: "Kill",
+      message: (
+        <div>
+          <p>This will kill all {taskIds.length} selected tasks
+          </p>
+          <p>
+            Are you sure you want to continue?
+          </p>
+        </div>
+      ),
+      severity: DialogSeverity.WARNING,
+      title: "Kill"
+    });
+
+    DialogStore.handleUserResponse(dialogId, () => {
+      TasksActions.deleteTasks(props.appId, taskIds, false);
+      this.setState({selectedTasks: {}});
+    });
   },
 
   toggleAllTasks: function () {
@@ -116,7 +150,29 @@ var TaskViewComponent = React.createClass({
       });
     }
 
-    this.setState({selectedTasks: newSelectedTasks});
+    // Ask confirmation if all tasks are not visible on a single page
+    if (modelTasks.length > this.state.itemsPerPage) {
+      const dialogId = DialogActions.confirm({
+        actionButtonLabel: "Select All",
+        message: (
+          <div>
+            <p>This will select all {modelTasks.length} tasks
+            </p>
+            <p>
+              Are you sure you want to continue?
+            </p>
+          </div>
+        ),
+        severity: DialogSeverity.WARNING,
+        title: "Select All"
+      });
+
+      DialogStore.handleUserResponse(dialogId, () => {
+        this.setState({selectedTasks: newSelectedTasks});
+      });
+    } else {
+      this.setState({selectedTasks: newSelectedTasks});
+    }
   },
 
   onTaskToggle: function (task, value) {
