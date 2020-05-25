@@ -36,7 +36,7 @@ var TaskListComponent = React.createClass({
     // If the click happens on the checkbox, let the checkbox's onchange event
     // handler handle it and skip handling the event here.
     if (event.target.nodeName !== "INPUT") {
-      this.props.toggleAllTasks();
+      console.log("We deactivate select all because it's too dangerous");
     }
   },
 
@@ -202,7 +202,7 @@ var TaskListComponent = React.createClass({
         <table className="table table-unstyled task-list">
           <thead>
             <tr>
-              <th className={headerClassSet}
+              <th className=""
                 width="1"
                 onClick={this.handleThToggleClick}>
               <input type="checkbox"
