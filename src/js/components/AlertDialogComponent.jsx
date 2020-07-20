@@ -37,6 +37,12 @@ var AlertDialogComponent = React.createClass({
     var data = props.data;
     var className = classNames("dialog", data.severity);
 
+    const addLineBreaks = string => string.split("\n").map((text, index) => (
+      <div>
+      {text}<br/>
+      </div>
+    ));
+
     return (
       <ModalComponent
           className={className}
@@ -47,7 +53,7 @@ var AlertDialogComponent = React.createClass({
           {data.title}
         </div>
         <div className="modal-body">
-          {data.message}
+          {addLineBreaks(data.message)}
         </div>
         <div className="modal-footer">
           <button

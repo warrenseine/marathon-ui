@@ -58,6 +58,17 @@ var config = Object.assign({
     return null;
   },
 
+  // The generate build a link to diagnose broken deployments
+  // It returns a url on which a GET will be made.
+  // the api calls is expected to return a json of the form:
+  // {
+  //   success: true
+  //   hints: [ String, String, [..] ]
+  // }
+  deploymentDiagnosisUrlGenerate: function () {
+    return null;
+  },
+
   serviceDomain: "",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :

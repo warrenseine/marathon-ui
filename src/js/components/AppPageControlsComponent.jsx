@@ -39,6 +39,21 @@ var AppPageControlsComponent = React.createClass({
     );
   },
 
+  getDeploymentDiagnosticButton: function () {
+    var props = this.props;
+
+    if (props.model.status === AppStatus.RUNNING) {
+      return null;
+    }
+
+    return (
+      <button className="btn btn-lg btn-warning"
+          onClick={this.handleDeploymentDiagnostic}>
+        Diagnose deployment
+      </button>
+    );
+  },
+
   handleClickOutside: function () {
     this.setState({
       isDropdownActivated: false
@@ -77,6 +92,7 @@ var AppPageControlsComponent = React.createClass({
           Application Restart
         </button>
         {this.getResetDelayButton()}
+        {this.getDeploymentDiagnosticButton()}
         <div className="dropdown app-controls">
           <button className="btn btn-lg btn-default"
               onClick={this.toggleDropdown}>

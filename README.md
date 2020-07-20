@@ -16,6 +16,6 @@ For complete beginners (like me):
 
 You can access marathon UI bundled with marathon on http://localhost:8080.
 
-To access **your local marathon ui**, use http://localhost:8081/dev.
+To access **your local marathon ui**, use http://localhost:8081/dev/ (don't forget the trailing /)
 
 http://localhost:8080 expose a version of marathon ui that you have built outside of docker (you don't need to)

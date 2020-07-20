@@ -1,5 +1,6 @@
 import React from "react";// eslint-disable-line no-unused-vars
 
+import config from "../config/config";
 import AppsActions from "../actions/AppsActions";
 import AppsEvents from "../events/AppsEvents";
 import AppsStore from "../stores/AppsStore";
@@ -168,6 +169,52 @@ var AppActionsHandlerMixin = {
     this.addResetDelayListener();
 
     QueueActions.resetDelay(this.props.model.id);
+  },
+
+  handleDeploymentDiagnostic: function () {
+    var appId = this.props.model.id;
+    var uri = config.deploymentDiagnosisUrlGenerate();
+    if (uri == null) {
+      console.log("config.deploymentDiagnosisUrlGenerate returned null " +
+                  "so not doing anything");
+      return;
+    }
+    // first dialog will disappear when second one will appear
+    const loadingDiagId = DialogActions.alert({
+      actionButtonLabel: "Ack",
+      message: "Diagnosis in progress, it will take a few seconds",
+      title: `Diagnosis of ${appId}`
+    });
+    fetch(uri)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          var message = "Diagnosis results:\n";
+          result["hints"].forEach(function (hint) {
+            message += `- ${hint}\n`;
+          });
+          if (result["hints"].length > 0) {
+            message += "hope it helps!";
+          } else {
+            message += "no hint :(";
+          }
+          const dialogId = DialogActions.alert({
+            actionButtonLabel: "Ack",
+            message: message,
+            title: `Diagnosis of ${appId}`
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          const dialogId = DialogActions.alert({
+            actionButtonLabel: "Ack",
+            message: `${error}`,
+            title: `Failure to diagnose ${appId}`
+          });
+        }
+      );
   },
 
   handleRestartApp: function () {
