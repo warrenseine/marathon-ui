@@ -42,14 +42,14 @@ var AppPageControlsComponent = React.createClass({
   getDeploymentDiagnosticButton: function () {
     var props = this.props;
 
-    if (props.model.status === AppStatus.RUNNING) {
+    if (props.model.status !== AppStatus.WAITING) {
       return null;
     }
 
     return (
       <button className="btn btn-lg btn-warning"
           onClick={this.handleDeploymentDiagnostic}>
-        Diagnose deployment
+        Diagnose schedulability
       </button>
     );
   },
