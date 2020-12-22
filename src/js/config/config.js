@@ -69,6 +69,11 @@ var config = Object.assign({
     return null;
   },
 
+  // Callback when "troubleshoot" button is clicked
+  troubleshootApp: function (appId) {
+    return null;
+  },
+
   serviceDomain: "",
   version: ("@@TEAMCITY_UI_VERSION".indexOf("@@TEAMCITY") === -1) ?
     "@@TEAMCITY_UI_VERSION" :

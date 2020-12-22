@@ -33,6 +33,12 @@ var runtimeConfig = {
   // }
   deploymentDiagnosisUrlGenerate: function() {
     return null;
+  },
+
+  // Callback when "troubleshoot" button is clicked
+  troubleshootApp: function(appId) {
+    var win = window.open("http://troubleshoot/appId/" + appId, '_blank');
+    win.focus();
   }
 
 };

@@ -29,6 +29,12 @@ var runtimeConfig = {
     return "http://webterminal/?taskId=" + taskId;
   },
 
+  // Callback when "troubleshoot" button is clicked
+  troubleshootApp: function(appId) {
+    var win = window.open("http://troubleshoot/appId/" + appId, '_blank');
+    win.focus();
+  },
+
   // The generator building link to sandbox to override
   // default urls (pointing to mesos leader ui)
   // It returns a url

@@ -39,6 +39,21 @@ var AppPageControlsComponent = React.createClass({
     );
   },
 
+  getTroubleshootButton: function () {
+    var props = this.props;
+
+    if (props.model.status !== AppStatus.RUNNING) {
+      return (
+        <button className="btn btn-lg btn-info"
+            onClick={this.handleTroubleshoot}>
+          Troubleshoot
+        </button>
+      );
+    }
+    return null;
+
+  },
+
   getDeploymentDiagnosticButton: function () {
     var props = this.props;
 
@@ -93,6 +108,7 @@ var AppPageControlsComponent = React.createClass({
         </button>
         {this.getResetDelayButton()}
         {this.getDeploymentDiagnosticButton()}
+        {this.getTroubleshootButton()}
         <div className="dropdown app-controls">
           <button className="btn btn-lg btn-default"
               onClick={this.toggleDropdown}>

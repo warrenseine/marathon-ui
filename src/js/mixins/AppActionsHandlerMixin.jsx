@@ -217,6 +217,11 @@ var AppActionsHandlerMixin = {
       );
   },
 
+  handleTroubleshoot: function () {
+    var appId = this.props.model.id;
+    var uri = config.troubleshootApp(appId);
+  },
+
   handleRestartApp: function () {
     var appId = this.props.model.id;
 
