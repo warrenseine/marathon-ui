@@ -20,7 +20,7 @@ jobs:
       - name: install gulp
         run: npm install -g gulp
       - name: install
-        run: npm ci
+        run: npm install
       - name: build dist
         run: npm run dist
       - name: Get the version
