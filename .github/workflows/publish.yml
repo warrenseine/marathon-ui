@@ -5,7 +5,7 @@ on:
       - main
       - master
       - criteo
-    tags:
+  tags:
 jobs:
   publish:
     name: Publish
