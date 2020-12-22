@@ -1,5 +1,7 @@
 name: PostSubmit
-on: tags
+on:
+  push:
+    tags:
 jobs:
   publish:
     name: Publish
