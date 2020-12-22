@@ -1,11 +1,5 @@
 name: PostSubmit
-on:
-  push:
-    branches:
-      - main
-      - master
-      - criteo
-  tags:
+on: tags
 jobs:
   publish:
     name: Publish
