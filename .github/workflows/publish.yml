@@ -23,7 +23,7 @@ jobs:
         id: get_version
         run: echo ::set-output name=TAG::${GITHUB_REF#refs/tags/}
       - name: prepare deploy
-        run: cd dist && zip -r marathon-ui-$TAG.zip .
+        run: cd dist && zip -r marathon-ui-${{TAG}}.zip .
         env:
           TAG: ${{ steps.get_version.outputs.TAG }}
       - name: push release
