@@ -175,12 +175,13 @@ var AppActionsHandlerMixin = {
     var appId = this.props.model.id;
     var uri = config.deploymentDiagnosisUrlGenerate();
     if (uri == null) {
+      /* eslint-disable no-console */
       console.log("config.deploymentDiagnosisUrlGenerate returned null " +
                   "so not doing anything");
       return;
     }
     // first dialog will disappear when second one will appear
-    const loadingDiagId = DialogActions.alert({
+    DialogActions.alert({
       actionButtonLabel: "Ack",
       message: "Diagnosis in progress, it will take a few seconds",
       title: `Diagnosis of ${appId}`
@@ -198,7 +199,7 @@ var AppActionsHandlerMixin = {
           } else {
             message += "no hint :(";
           }
-          const dialogId = DialogActions.alert({
+          DialogActions.alert({
             actionButtonLabel: "Ack",
             message: message,
             title: `Diagnosis of ${appId}`
@@ -208,7 +209,7 @@ var AppActionsHandlerMixin = {
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
-          const dialogId = DialogActions.alert({
+          DialogActions.alert({
             actionButtonLabel: "Ack",
             message: `${error}`,
             title: `Failure to diagnose ${appId}`
@@ -219,7 +220,7 @@ var AppActionsHandlerMixin = {
 
   handleTroubleshoot: function () {
     var appId = this.props.model.id;
-    var uri = config.troubleshootApp(appId);
+    config.troubleshootApp(appId);
   },
 
   handleRestartApp: function () {

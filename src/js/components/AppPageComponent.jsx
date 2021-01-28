@@ -3,7 +3,6 @@ import classNames from "classnames";
 import Mousetrap from "mousetrap";
 
 import AppsEvents from "../events/AppsEvents";
-import AppStatus from "../constants/AppStatus";
 import AppsStore from "../stores/AppsStore";
 import BreadcrumbComponent from "../components/BreadcrumbComponent";
 import AppHealthBarComponent from "./AppHealthBarComponent";

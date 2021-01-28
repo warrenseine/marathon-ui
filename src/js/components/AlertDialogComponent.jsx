@@ -37,7 +37,7 @@ var AlertDialogComponent = React.createClass({
     var data = props.data;
     var className = classNames("dialog", data.severity);
 
-    const addLineBreaks = string => string.split("\n").map((text, index) => (
+    const addLineBreaks = string => string.split("\n").map(text => (
       <div>
       {text}<br/>
       </div>

@@ -54,7 +54,7 @@ var config = Object.assign({
   // The generator building link to sandbox to override
   // default urls (pointing to mesos leader ui)
   // It returns a url
-  taskSandboxLinkGenerator: function (executorId) {
+  taskSandboxLinkGenerator: function () {
     return null;
   },
 
@@ -70,7 +70,7 @@ var config = Object.assign({
   },
 
   // Callback when "troubleshoot" button is clicked
-  troubleshootApp: function (appId) {
+  troubleshootApp: function () {
     return null;
   },
 

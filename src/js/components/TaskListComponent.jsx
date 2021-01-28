@@ -36,6 +36,7 @@ var TaskListComponent = React.createClass({
     // If the click happens on the checkbox, let the checkbox's onchange event
     // handler handle it and skip handling the event here.
     if (event.target.nodeName !== "INPUT") {
+      /* eslint-disable no-console */
       console.log("We deactivate select all because it's too dangerous");
     }
   },
